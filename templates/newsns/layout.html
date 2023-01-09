@@ -1,0 +1,15 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body bgcolor="black" text='#ffffff'>
+    <span>user ID: <span>{{login_user.id}}</span></span>
+    <span><a href="{% url 'newsns:logout_view' %}">lotout</a></span>
+
+    <div>{% block header %}{% endblock %}</div>
+    <div>{% block content %}{% endblock %}</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'newsns/layout.html' %}
+
+{% block title %}censored word list{% endblock %}
+
+{% block header %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>censored</h1>
+
+<form action="{% url 'newsns:censored_word_list' %}" method="post">
+    {% csrf_token %}
+    {{search_form.as_p}}
+    <button>search</button>
+</form>
+
+<form action="{% url 'newsns:censored_word_list' %}" method="post">
+    {% csrf_token %}
+    {{register_form.as_p}}
+    <button>register</button>
+</form>
+
+{% for cw in censored_words %}
+    <hr/>
+    <p>
+        <a href="{% url 'newsns:secret_word_list' cw %}">
+            {{cw}}<br/>
+        </a>
+    </p>
+{% endfor %}
+{% endblock %}

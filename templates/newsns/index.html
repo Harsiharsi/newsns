@@ -1,0 +1,40 @@
+{% extends 'newsns/layout.html' %}
+
+{% block title %}index{% endblock %}
+
+{% block header %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>newsns</h1>
+
+
+<p>
+    /newsns/signup<br/>
+    /newsns/post<br/>
+    /newsns/article/&lt;数字&gt;<br/>
+    /newsns/post_comment/&lt;数字&gt;<br/>
+    /newsns/censored_word_list<br/>
+    /newsns/logout<br/>
+</p>
+
+{% for a in articles %}
+    <hr/>
+    <p>
+        <a href="{% url 'newsns:article' a.id %}">
+            {{a.posted_date}}<br/>
+            {{a.content | linebreaksbr}}<br/>
+            {{a.id}}<br/>
+        </a>
+    </p>
+{% endfor %}
+{% endblock %}

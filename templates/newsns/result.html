@@ -1,0 +1,38 @@
+{% extends 'newsns/layout.html' %}
+
+{% block title %}result{% endblock %}
+
+{% block header %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>result</h1>
+
+<form action="{% url 'newsns:search' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>search</button>
+</form>
+
+<p>{{search_string}}</p>
+
+{% for a in result %}
+    <hr/>
+    <p>
+        <a href="{% url 'newsns:article' a.id %}">
+            {{a.posted_date}}<br/>
+            {{a.content | linebreaksbr}}<br/>
+            {{a.id}}<br/>
+        </a>
+    </p>
+{% endfor %}
+{% endblock %}

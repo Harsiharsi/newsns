@@ -1,0 +1,31 @@
+{% extends 'newsns/layout.html' %}
+
+{% block title %}post{% endblock %}
+
+{% block header %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>post</h1>
+
+{% if article %}
+    {{article.posted_date}}<br/>
+    {{article.content | linebreaksbr}}<br/>
+
+    <form action="{% url 'newsns:post_comment' article.id %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>post</button>
+    </form>
+{% endif %}
+
+{% endblock %}

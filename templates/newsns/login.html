@@ -1,0 +1,25 @@
+{% extends 'newsns/layout.html' %}
+
+{% block title %}login{% endblock %}
+
+{% block header %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>login</h1>
+
+<form action="{% url 'newsns:login_view' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>login</button>
+</form>
+{% endblock %}

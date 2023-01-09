@@ -1,0 +1,32 @@
+{% extends 'newsns/layout.html' %}
+
+{% block title %}confirm{% endblock %}
+
+{% block header %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>confirm</h1>
+
+<form action="{% url 'newsns:confirm' %}" method="post">
+    {% csrf_token %}
+    {{ forms }}
+    <input type="hidden" name="content" value="{{ content }}">
+    <button>post</button>
+</form>
+
+<form action="{% url 'newsns:confirm' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="notpost" value="notpost">
+    <button>don't post</button>
+</form>
+{% endblock %}

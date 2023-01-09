@@ -1,0 +1,37 @@
+{% extends 'newsns/layout.html' %}
+
+{% block title %}article{% endblock %}
+
+{% block header %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>article</h1>
+
+{% if article %}
+    {{article.posted_date}}<br/>
+    {{article.content | linebreaksbr}}<br/>
+{% endif %}
+
+<hr>
+
+{% for c in comments %}
+    {{c.posted_date}}<br/>
+    {{c.content | linebreaksbr}}<br/>
+    {% if c.is_article_contributor %}
+        記事投稿者<br/>
+    {% elif c.first_posted_date != c.posted_date %}
+        初回投稿: {{c.first_posted_date}}<br/>
+    {% endif %}
+{% endfor %}
+{% endblock %}
+
